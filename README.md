@@ -50,19 +50,16 @@ provider "aws" {
   
 // Use the iam module  
 module "iam" {  
-  source  = "lily4499/RDS/AWS"  
-  version = "1.0.0"  
 
-//  source                  = "github.com/lily4499/terraform-aws-rds?ref=v1.0.0/iam"  
+  source                  = "github.com/lily4499/terraform-aws-rds?ref=v1.0.0/iam"  
   iam_role_name           = "RDSRole"  
 }  
   
 // Use the network module  
 module "network" {  
-   source  = "lily4499/RDS/AWS"  
-   version = "1.0.0"  
+
    
-// source                  = "github.com/lily4499/terraform-aws-rds?ref=v1.0.0/network"  
+  source                  = "github.com/lily4499/terraform-aws-rds?ref=v1.0.0/network"  
   vpc_id                  = "aws_vpc.rds_vpc.id"  
   dns_hostnames           = true  
   dns_support             = true  
@@ -74,10 +71,7 @@ module "network" {
 // Use the RDS module  
 module "rds" {  
 
-  source  = "lily4499/RDS/AWS"  
-  version = "1.0.0"  
-
-//  source                  = "github.com/lily4499/terraform-aws-rds?ref=v1.0.0/rds"  
+  source                  = "github.com/lily4499/terraform-aws-rds?ref=v1.0.0/rds"  
   subnet_ids              = module.network.priv_subnet_ids  
   vpc_id                  = module.network.vpc_id  
   db_engine               = "mysql"  

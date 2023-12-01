@@ -51,7 +51,8 @@ provider "aws" {
 // Use the iam module  
 module "iam" {  
 
-  source                  = "github.com/lily4499/terraform-aws-rds?ref=v1.0.0/iam"  
+  source  = "lily4499/rds/aws//iam"  
+  version = "1.0.2"  
   iam_role_name           = "RDSRole"  
 }  
   
@@ -59,7 +60,8 @@ module "iam" {
 module "network" {  
 
    
-  source                  = "github.com/lily4499/terraform-aws-rds?ref=v1.0.0/network"  
+  source  = "lily4499/rds/aws//network"  
+  version = "1.0.2"  
   vpc_id                  = "aws_vpc.rds_vpc.id"  
   dns_hostnames           = true  
   dns_support             = true  
@@ -71,7 +73,8 @@ module "network" {
 // Use the RDS module  
 module "rds" {  
 
-  source                  = "github.com/lily4499/terraform-aws-rds?ref=v1.0.0/rds"  
+  source  = "lily4499/rds/aws//rds"
+  version = "1.0.2"  
   subnet_ids              = module.network.priv_subnet_ids  
   vpc_id                  = module.network.vpc_id  
   db_engine               = "mysql"  

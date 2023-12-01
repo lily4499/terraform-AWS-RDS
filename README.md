@@ -44,41 +44,41 @@ To use this Terraform configuration, you can call this code from GitHub by follo
 *******************************     Code start here    ***************************
 
 
-provider "aws" {
-  region = "us-east-1" // Set your desired region here
-}
-
-# Use the iam module
-module "iam" {
-  source        = "github.com/lily4499/terraform-aws-rds/iam"
-  iam_role_name = "RDSRole"
-}
-
-# Use the network module
-module "network" {
-  source = ".github.com/lily4499/terraform-aws-rds/network"
-  vpc_id        = "aws_vpc.rds_vpc.id"
-  dns_hostnames = true
-  dns_support   = true
-  vpc_cidr_block          = "10.0.0.0/16"
-  pub_subnet_cidr_blocks  = ["10.0.1.0/24", "10.0.2.0/24"]
-  priv_subnet_cidr_blocks = ["10.0.3.0/24", "10.0.4.0/24"]
-}
-
-# Use the RDS module
-module "rds" {
-  source                        = "github.com/lily4499/terraform-aws-rds/rds"
-  subnet_ids                 = module.network.priv_subnet_ids
-  vpc_id                        = module.network.vpc_id
-  db_engine                  = "mysql"
-  db_engine_version     = "8.0.31"
-  db_multi_az                = false
-  db_identifier                = "dev-rds-instance"
-  db_username                = "liliane"
-  db_password                 = "liliane123"
-  db_class                         = "db.t2.micro"
-  db_allocated_storage     = 200
-  db_name                         = "applicationdb"
-  db_skip_final_snapshot   = true
-}
+provider "aws" {  
+  region = "us-east-1" // Set your desired region here  
+}  
+  
+// Use the iam module  
+module "iam" {  
+  source                  = "github.com/lily4499/terraform-aws-rds/iam?ref=v1.0.0"  
+  iam_role_name           = "RDSRole"  
+}  
+  
+// Use the network module  
+module "network" {  
+  source                  = "github.com/lily4499/terraform-aws-rds/network?ref=v1.0.0"  
+  vpc_id                  = "aws_vpc.rds_vpc.id"  
+  dns_hostnames           = true  
+  dns_support             = true  
+  vpc_cidr_block          = "10.0.0.0/16"  
+  pub_subnet_cidr_blocks  = ["10.0.1.0/24", "10.0.2.0/24"]  
+  priv_subnet_cidr_blocks = ["10.0.3.0/24", "10.0.4.0/24"]  
+}  
+  
+// Use the RDS module  
+module "rds" {  
+  source                  = "github.com/lily4499/terraform-aws-rds/rds?ref=v1.0.0"  
+  subnet_ids              = module.network.priv_subnet_ids  
+  vpc_id                  = module.network.vpc_id  
+  db_engine               = "mysql"  
+  db_engine_version       = "8.0.31"  
+  db_multi_az             = false  
+  db_identifier           = "dev-rds-instance"  
+  db_username             = "liliane"  
+  db_password             = "liliane123"  
+  db_class                = "db.t2.micro"  
+  db_allocated_storage    = 200  
+  db_name                 = "applicationdb"  
+  db_skip_final_snapshot  = true  
+}  
 

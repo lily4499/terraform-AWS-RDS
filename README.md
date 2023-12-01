@@ -52,7 +52,7 @@ provider "aws" {
 module "iam" {  
 
   source  = "lily4499/rds/aws//iam"  
-  version = "latest"  
+  version = "1.0.2"  
   iam_role_name           = "RDSRole"  
 }  
   
@@ -61,7 +61,7 @@ module "network" {
 
    
   source  = "lily4499/rds/aws//network"  
-  version = "latest"  
+  version = "1.0.2"  
   vpc_id                  = "aws_vpc.rds_vpc.id"  
   dns_hostnames           = true  
   dns_support             = true  
@@ -74,7 +74,7 @@ module "network" {
 module "rds" {  
 
   source  = "lily4499/rds/aws//rds"  
-  version = "latest"  
+  version = "1.0.2"  
   subnet_ids              = module.network.priv_subnet_ids  
   vpc_id                  = module.network.vpc_id  
   db_engine               = "mysql"  
